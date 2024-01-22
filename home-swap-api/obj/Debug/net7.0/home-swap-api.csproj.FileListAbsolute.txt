@@ -231,3 +231,9 @@
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/MySqlConnector.dll
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Pomelo.EntityFrameworkCore.MySql.dll
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/System.CodeDom.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/BCrypt.Net-Next.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll

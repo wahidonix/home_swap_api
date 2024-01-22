@@ -56,6 +56,15 @@ namespace home_swap_api.Service.Impl
             return user;
         }
 
+        public async Task<User?> GetUserByUsername(string username)
+        {
+            var user = await appDbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (user is null)
+                return null;
+
+            return user;
+        }
+
         public async Task<User?> UpdateUser(int id, User user)
         {
             var user1 = await appDbContext.Users.FindAsync(id);

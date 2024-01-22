@@ -1,4 +1,5 @@
 ﻿using System;
+using home_swap_api.Dto;
 using home_swap_api.Models;
 using home_swap_api.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,15 @@ namespace home_swap_api.Controllers
         public async Task<ActionResult<User>> GetSingleUser(int id)
         {
             var result = await userService.GetSingleUser(id);
+            if (result is null)
+                return NotFound("user not found");
+
+            return Ok(result);
+        }
+        [HttpGet("check-user/(username)")]
+        public async Task<ActionResult<User>> GetUserByUsername(string username)
+        {
+            var result = await userService.GetUserByUsername(username);
             if (result is null)
                 return NotFound("user not found");
 
@@ -58,6 +68,8 @@ namespace home_swap_api.Controllers
 
             return Ok(result);
         }
+
+        
 
     }
 }
