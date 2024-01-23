@@ -62,9 +62,18 @@ namespace home_swap_api.Controllers
 
         private string CreateToken(User user)
         {
+            string? role;
+            if (user.Username == "alen")
+            {
+                role = "Admin";
+            } else
+            {
+                role = "User";
+            }
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name,user.Username)
+                new Claim(ClaimTypes.Name,user.Username),
+                new Claim(ClaimTypes.Role,role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(

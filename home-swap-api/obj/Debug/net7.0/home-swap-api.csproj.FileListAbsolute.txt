@@ -237,3 +237,9 @@
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Scrutor.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
