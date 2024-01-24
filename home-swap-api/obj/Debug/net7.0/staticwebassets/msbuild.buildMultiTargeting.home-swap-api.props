@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/home-swap-api.props" />
+</Project>

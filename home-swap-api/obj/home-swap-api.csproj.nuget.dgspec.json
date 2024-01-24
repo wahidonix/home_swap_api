@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/vahid/Projects/home-swap-api/home-swap-api/home-swap-api.csproj": {}
+    "/Users/alen/Desktop/home_swap_api/home-swap-api/home-swap-api.csproj": {}
   },
   "projects": {
-    "/Users/vahid/Projects/home-swap-api/home-swap-api/home-swap-api.csproj": {
+    "/Users/alen/Desktop/home_swap_api/home-swap-api/home-swap-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/vahid/Projects/home-swap-api/home-swap-api/home-swap-api.csproj",
+        "projectUniqueName": "/Users/alen/Desktop/home_swap_api/home-swap-api/home-swap-api.csproj",
         "projectName": "home-swap-api",
-        "projectPath": "/Users/vahid/Projects/home-swap-api/home-swap-api/home-swap-api.csproj",
-        "packagesPath": "/Users/vahid/.nuget/packages/",
-        "outputPath": "/Users/vahid/Projects/home-swap-api/home-swap-api/obj/",
+        "projectPath": "/Users/alen/Desktop/home_swap_api/home-swap-api/home-swap-api.csproj",
+        "packagesPath": "/Users/alen/.nuget/packages/",
+        "outputPath": "/Users/alen/Desktop/home_swap_api/home-swap-api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/vahid/.nuget/NuGet/NuGet.Config"
+          "/Users/alen/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -39,13 +39,51 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.14, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[7.2.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.2.0, )"
             }
           },
           "imports": [
