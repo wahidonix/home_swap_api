@@ -8,6 +8,13 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Configuration;
+using home_swap_api.Repository;
+using home_swap_api.interfaces;
+using AutoMapper;
+using home_swap_api.Helpers;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using home_swap_api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +35,10 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 builder.Services.AddScoped<UserService, UserServiceImpl>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+builder.Services.AddControllers().AddNewtonsoftJson();
+
 var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -52,6 +63,26 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseExceptionHandler(
+
+            options =>
+            {
+                options.Run(
+
+                    async context =>
+                        {
+                            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                            var ex = context.Features.Get<IExceptionHandlerFeature>();
+                            if (ex != null) { await context.Response.WriteAsync(ex.Error.Message); }
+
+                        }
+
+                    );
+            }
+        );
 }
 
 app.UseHttpsRedirection();

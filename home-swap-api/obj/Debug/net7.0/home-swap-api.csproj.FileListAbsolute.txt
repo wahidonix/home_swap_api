@@ -243,3 +243,8 @@
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Scrutor.dll
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.dll
 /Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/AutoMapper.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/alen/Desktop/home_swap_api/home-swap-api/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll
