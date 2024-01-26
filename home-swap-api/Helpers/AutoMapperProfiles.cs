@@ -14,6 +14,9 @@ namespace home_swap_api.Helpers
 
             CreateMap<House, HouseUpdateDTO>();
             CreateMap<House, HouseUpdateDTO>().ReverseMap();
+
+            CreateMap<Offer, OfferDTO>();
+            CreateMap<Offer, OfferDTO>().ReverseMap();
         }
 	}
 }
