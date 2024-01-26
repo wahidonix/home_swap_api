@@ -26,7 +26,7 @@ namespace home_swap_api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<AuthResponseDTO>> Register([FromBody] UserDTO userDTO)
         {
             var user = new User();
             var existingUser = await userService.GetUserByUsername(userDTO.Username);
@@ -40,13 +40,19 @@ namespace home_swap_api.Controllers
             user.IsBlocked = false;
 			var result = await userService.AddUser(user);
 
-            string token = CreateToken(result);
+            var authResponseDTO = new AuthResponseDTO();
+            authResponseDTO.Username = result.Username;
+            authResponseDTO.Id = result.Id;
+            authResponseDTO.Role = result.Role;
 
-            return Ok(token);
+            string token = CreateToken(authResponseDTO);
+            authResponseDTO.Token = token;
+
+            return Ok(authResponseDTO);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] UserDTO userDTO)
         {
             var result = await userService.GetUserByUsername(userDTO.Username);
             if (result is null)
@@ -57,19 +63,25 @@ namespace home_swap_api.Controllers
                 return BadRequest("wrong password");
             }
 
-            string token = CreateToken(result);
+            var authResponseDTO = new AuthResponseDTO();
+            authResponseDTO.Username = result.Username;
+            authResponseDTO.Id = result.Id;
+            authResponseDTO.Role = result.Role;
 
-            return Ok(token);
+            string token = CreateToken(authResponseDTO);
+            authResponseDTO.Token = token;
+
+            return Ok(authResponseDTO);
         }
 
-        private string CreateToken(User user)
+        private string CreateToken(AuthResponseDTO authResponseDTO)
         {
             
             
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name,user.Id.ToString()),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Name,authResponseDTO.Id.ToString()),
+                new Claim(ClaimTypes.Role, authResponseDTO.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
