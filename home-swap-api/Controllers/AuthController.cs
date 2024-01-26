@@ -36,6 +36,8 @@ namespace home_swap_api.Controllers
 
 			user.Username = userDTO.Username;
 			user.PasswordHash = passwordHash;
+            user.Role = "User";
+            user.IsBlocked = false;
 			var result = await userService.AddUser(user);
 
             string token = CreateToken(result);
@@ -62,18 +64,12 @@ namespace home_swap_api.Controllers
 
         private string CreateToken(User user)
         {
-            string? role;
-            if (user.Username == "alen")
-            {
-                role = "Admin";
-            } else
-            {
-                role = "User";
-            }
+            
+            
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name,user.Username),
-                new Claim(ClaimTypes.Role,role)
+                new Claim(ClaimTypes.Name,user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
