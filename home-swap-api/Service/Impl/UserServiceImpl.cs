@@ -28,6 +28,19 @@ namespace home_swap_api.Service.Impl
             return user;
         }
 
+        public async Task<User?> BlockUser(int id)
+        {
+            var user = await appDbContext.Users.FindAsync(id);
+            if (user is null)
+                return null;
+            user.IsBlocked = !user.IsBlocked;
+            await appDbContext.SaveChangesAsync();
+
+            return user;
+        }
+
+        
+
         public async Task<User?> DeleteUser(int id)
         {
             var user = await appDbContext.Users.FindAsync(id);

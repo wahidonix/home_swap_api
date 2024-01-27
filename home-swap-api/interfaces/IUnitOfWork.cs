@@ -6,7 +6,10 @@ namespace home_swap_api.interfaces
 	public interface IUnitOfWork
 	{
 		IHouseRepository HouseRepository { get; }
-		Task<bool> SaveAsync();
+
+		IOfferRepository OfferRepository { get; }
+	
+        Task<bool> SaveAsync();
 	}
 }
 

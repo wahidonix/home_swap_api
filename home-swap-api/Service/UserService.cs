@@ -11,6 +11,7 @@ namespace home_swap_api.Service
         Task<User?> UpdateUser(int id,User user);
         Task<User?> DeleteUser(int id);
         Task<User?> GetUserByUsername(string username);
+        Task<User?> BlockUser(int id);
 
     }
 }
