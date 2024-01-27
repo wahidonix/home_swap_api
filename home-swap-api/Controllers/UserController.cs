@@ -2,6 +2,7 @@
 using home_swap_api.Dto;
 using home_swap_api.Models;
 using home_swap_api.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace home_swap_api.Controllers
@@ -67,6 +68,18 @@ namespace home_swap_api.Controllers
                 return NotFound("user not found");
 
             return Ok(result);
+        }
+
+        [HttpPut("blocked-status/(id)"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<User>> BlockUser(int id)
+        {
+            var result = await userService.BlockUser(id);
+            if (result is null)
+                return NotFound("User not found");
+
+            return Ok(result);
+
+
         }
 
 
