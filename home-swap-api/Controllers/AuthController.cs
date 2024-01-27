@@ -10,11 +10,11 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace home_swap_api.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class AuthController : ControllerBase
-	{
-	
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+
 
         private readonly UserService userService;
         private readonly IConfiguration configuration;
@@ -34,11 +34,11 @@ namespace home_swap_api.Controllers
                 return BadRequest("username already taken");
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(userDTO.Password);
 
-			user.Username = userDTO.Username;
-			user.PasswordHash = passwordHash;
+            user.Username = userDTO.Username;
+            user.PasswordHash = passwordHash;
             user.Role = "User";
             user.IsBlocked = false;
-			var result = await userService.AddUser(user);
+            var result = await userService.AddUser(user);
 
             var authResponseDTO = new AuthResponseDTO();
             authResponseDTO.Username = result.Username;
@@ -76,8 +76,8 @@ namespace home_swap_api.Controllers
 
         private string CreateToken(AuthResponseDTO authResponseDTO)
         {
-            
-            
+
+
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,authResponseDTO.Id.ToString()),
@@ -103,4 +103,3 @@ namespace home_swap_api.Controllers
 
     }
 }
-

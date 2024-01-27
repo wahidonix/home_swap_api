@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,6 +9,7 @@ using home_swap_api.Dto;
 using home_swap_api.interfaces;
 using home_swap_api.Models;
 using home_swap_api.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -53,6 +55,27 @@ namespace home_swap_api.Controllers
 
             return StatusCode(201);
         }
+
+        [HttpPut("blocked-status/(id)"), Authorize(Roles = "Admin")]
+        public async Task<IActionResult> BlockHouse(int id)
+        {
+            var houseFromDb = await uow.HouseRepository.FindHouse(id);
+            houseFromDb.IsBlocked = !houseFromDb.IsBlocked;
+            await uow.SaveAsync();
+            return StatusCode(200);
+        }
+
+        [HttpPut("swapped-status/(id)"), Authorize(Roles = "Admin")]
+        public async Task<IActionResult> SwapHouse(int id)
+        {
+            var houseFromDb = await uow.HouseRepository.FindHouse(id);
+            houseFromDb.IsSwapped = !houseFromDb.IsSwapped;
+            await uow.SaveAsync();
+
+            return StatusCode(200);
+        }
+
+
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteHouse(int id)

@@ -6,21 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace home_swap_api.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class UserController : ControllerBase
-	{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
+    {
         private readonly UserService userService;
         public UserController(UserService userService)
         {
             this.userService = userService;
         }
 
-		[HttpGet]
-		public async Task<ActionResult<List<User>>> GetAllUsers()
-		{
-            return await userService.GetAllUsers();	
-		}
+        [HttpGet]
+        public async Task<ActionResult<List<User>>> GetAllUsers()
+        {
+            return await userService.GetAllUsers();
+        }
 
         [HttpGet("(id)")]
         public async Task<ActionResult<User>> GetSingleUser(int id)
@@ -52,7 +52,7 @@ namespace home_swap_api.Controllers
         [HttpPut("(id)")]
         public async Task<ActionResult<User>> UpdateUser(int id, [FromBody] User user)
         {
-            var result = await userService.UpdateUser(id,user);
+            var result = await userService.UpdateUser(id, user);
             if (result is null)
                 return NotFound("user not found");
 
@@ -69,8 +69,7 @@ namespace home_swap_api.Controllers
             return Ok(result);
         }
 
-        
+
 
     }
 }
-
