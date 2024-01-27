@@ -11,7 +11,9 @@ namespace home_swap_api.Repository
         Task<Offer> FindOffer(int id);
         Task<IEnumerable<Offer>> GetOffersByHouseIdAsync(int houseId);
         Task DeleteOffersByHouseIdAsync(int houseId);
-      
+        Task<IEnumerable<Offer>> GetOffersByUserIdAsync(int userId);
+        Task DeleteOffersByUserIdAsync(int userId);
+
     }
 }
 

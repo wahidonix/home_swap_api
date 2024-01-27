@@ -14,10 +14,12 @@ namespace home_swap_api.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserService userService;
-      
-        public UserController(UserService userService )
+        private readonly IUnitOfWork uow;
+
+        public UserController(UserService userService , IUnitOfWork uow)
         {
             this.userService = userService;
+            this.uow = uow;
         }
 
         [HttpGet]
@@ -80,8 +82,12 @@ namespace home_swap_api.Controllers
             if (result is null)
                 return NotFound("User not found");
 
-            
-           
+            if (result.IsBlocked)
+            {
+                await uow.OfferRepository.DeleteOffersByUserIdAsync(id);
+                await uow.SaveAsync();
+            }
+
 
             return Ok(result);
 

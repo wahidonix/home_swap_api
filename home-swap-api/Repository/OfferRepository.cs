@@ -32,6 +32,11 @@ namespace home_swap_api.Repository
             appDbContext.Offers.RemoveRange(offersToDelete);
         }
 
+        public async Task DeleteOffersByUserIdAsync(int userId)
+        {
+            var offersToDelete = await GetOffersByUserIdAsync(userId);
+            appDbContext.Offers.RemoveRange(offersToDelete);
+        }
 
         public async Task<Offer> FindOffer(int id)
         {
@@ -46,6 +51,11 @@ namespace home_swap_api.Repository
         public async Task<IEnumerable<Offer>> GetOffersByHouseIdAsync(int houseId)
         {
             return await appDbContext.Offers.Where(offer => offer.HouseId == houseId).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Offer>> GetOffersByUserIdAsync(int userId)
+        {
+            return await appDbContext.Offers.Where(offer => offer.BuyerId == userId).ToListAsync();
         }
     }
 }

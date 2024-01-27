@@ -1,5 +1,6 @@
 ﻿using System;
 using home_swap_api.Data;
+using home_swap_api.interfaces;
 using home_swap_api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +15,13 @@ namespace home_swap_api.Service.Impl
         };
 
         private readonly AppDbContext appDbContext;
-      
+        private readonly IUnitOfWork uow;
 
-        public UserServiceImpl(AppDbContext appDbContext)
+
+        public UserServiceImpl(AppDbContext appDbContext,IUnitOfWork uow)
         {
             this.appDbContext = appDbContext;
+            this.uow = uow;
         }
 
         public async Task<User> AddUser(User user)
@@ -35,6 +38,7 @@ namespace home_swap_api.Service.Impl
             if (user is null)
                 return null;
             user.IsBlocked = !user.IsBlocked;
+           
             await appDbContext.SaveChangesAsync();
             
 
