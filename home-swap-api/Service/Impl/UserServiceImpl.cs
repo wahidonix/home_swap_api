@@ -14,6 +14,7 @@ namespace home_swap_api.Service.Impl
         };
 
         private readonly AppDbContext appDbContext;
+      
 
         public UserServiceImpl(AppDbContext appDbContext)
         {
@@ -35,6 +36,7 @@ namespace home_swap_api.Service.Impl
                 return null;
             user.IsBlocked = !user.IsBlocked;
             await appDbContext.SaveChangesAsync();
+            
 
             return user;
         }

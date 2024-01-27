@@ -24,6 +24,8 @@ namespace home_swap_api.Repository
             appDbContext.Offers.Remove(offer);
         }
 
+        
+
         public async Task DeleteOffersByHouseIdAsync(int houseId)
         {
             var offersToDelete = await GetOffersByHouseIdAsync(houseId);
