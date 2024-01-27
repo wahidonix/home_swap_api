@@ -34,6 +34,15 @@ namespace home_swap_api.Controllers
             return Ok(offersDTO);
         }
 
+        [HttpGet("byHouseId/{houseId}")]
+        public async Task<IActionResult> GetOffersByHouseId(int houseId)
+        {
+            var offers = await uow.OfferRepository.GetOffersByHouseIdAsync(houseId);
+            var offersDTO = mapper.Map<IEnumerable<OfferDTO>>(offers);
+
+            return Ok(offersDTO);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddOffer([FromBody] OfferDTO offerDTO)
         {

@@ -62,6 +62,13 @@ namespace home_swap_api.Controllers
             var houseFromDb = await uow.HouseRepository.FindHouse(id);
             houseFromDb.IsBlocked = !houseFromDb.IsBlocked;
             await uow.SaveAsync();
+            if (houseFromDb.IsBlocked)
+            {
+                // Delete offers associated with the blocked house
+                await uow.OfferRepository.DeleteOffersByHouseIdAsync(id);
+                await uow.SaveAsync();
+            }
+
             return StatusCode(200);
         }
 

@@ -9,6 +9,8 @@ namespace home_swap_api.Repository
         void AddOffer(Offer offer);
         void DeleteOffer(int OfferId);
         Task<Offer> FindOffer(int id);
+        Task<IEnumerable<Offer>> GetOffersByHouseIdAsync(int houseId);
+        Task DeleteOffersByHouseIdAsync(int houseId);
     }
 }
 
