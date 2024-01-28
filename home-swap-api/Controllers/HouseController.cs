@@ -123,6 +123,30 @@ namespace home_swap_api.Controllers
             return StatusCode(200);
         }
 
+        [HttpPost("filtered-houses")]
+        public async Task<IActionResult> GetFilteredHouses([FromBody] FilterDTO filterDTO)
+        {
+            var houses = await uow.HouseRepository.GetHousesAsync();
+            if (!string.IsNullOrEmpty(filterDTO.Type))
+            {
+                houses = houses.Where(house => house.Type == filterDTO.Type).ToList();
+            }
+            if (!string.IsNullOrEmpty(filterDTO.Garage))
+            {
+                houses = houses.Where(house => house.Garage == filterDTO.Garage).ToList();
+            }
+            if (filterDTO.Rooms.HasValue)
+            {
+                houses = houses.Where(house => house.Rooms == filterDTO.Rooms.Value).ToList();
+            }
+
+            var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
+
+            //throw new Exception("Some unknow error");
+
+            return Ok(housesDTO);
+        }
+
 
 
     }

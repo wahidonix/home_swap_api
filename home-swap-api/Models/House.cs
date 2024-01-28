@@ -11,7 +11,7 @@ namespace home_swap_api.Models
         [Required]
         public string Area { get; set; } = string.Empty;
         [Required]
-        public int Rooms { get; set; }
+        public int? Rooms { get; set; }
         public string Garage { get; set; } = string.Empty;
         public bool IsBlocked { get; set; } = false;
         public bool IsSwapped { get; set; } = false;
