@@ -36,6 +36,20 @@ namespace home_swap_api.Controllers
         public async Task<IActionResult> GetHouses()
         {
             var houses = await uow.HouseRepository.GetHousesAsync();
+            
+            var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
+
+            //throw new Exception("Some unknow error");
+
+            return Ok(housesDTO);
+        }
+
+        [HttpGet("available-houses")]
+        public async Task<IActionResult> GetAvailableHouses()
+        {
+            var houses = await uow.HouseRepository.GetHousesAsync();
+            houses = houses.Where(house => !house.IsBlocked).ToList();
+            houses = houses.Where(house => !house.IsSwapped).ToList();
             var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
 
             //throw new Exception("Some unknow error");
