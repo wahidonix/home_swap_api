@@ -139,6 +139,13 @@ namespace home_swap_api.Controllers
             {
                 houses = houses.Where(house => house.Rooms == filterDTO.Rooms.Value).ToList();
             }
+            if (filterDTO.MinArea.HasValue && filterDTO.MaxArea.HasValue)
+            {
+                houses = houses
+                    .Where(house => house.Area >= filterDTO.MinArea.Value && house.Area <= filterDTO.MaxArea.Value)
+                    .ToList();
+            }
+
 
             var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
 

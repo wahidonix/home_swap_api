@@ -9,7 +9,7 @@ namespace home_swap_api.Dto
         [Required (ErrorMessage ="Treba ti tip")]
         public string Type { get; set; } = string.Empty;
         [Required]
-        public string Area { get; set; } = string.Empty;
+        public int? Area { get; set; }
         [Required]
         public int Rooms { get; set; }
         [StringLength(3)]
