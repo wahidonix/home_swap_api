@@ -7,6 +7,7 @@ namespace home_swap_api.Dto
         public string Payment { get; set; }
         public int BuyerId { get; set; }
         public int? HouseId { get; set; } = 0;
+        public string Status { get; set; } = "Pending";
         public OfferDTO()
 		{
 		}

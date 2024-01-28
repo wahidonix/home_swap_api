@@ -36,6 +36,20 @@ namespace home_swap_api.Controllers
         public async Task<IActionResult> GetHouses()
         {
             var houses = await uow.HouseRepository.GetHousesAsync();
+            
+            var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
+
+            //throw new Exception("Some unknow error");
+
+            return Ok(housesDTO);
+        }
+
+        [HttpGet("available-houses")]
+        public async Task<IActionResult> GetAvailableHouses()
+        {
+            var houses = await uow.HouseRepository.GetHousesAsync();
+            houses = houses.Where(house => !house.IsBlocked).ToList();
+            houses = houses.Where(house => !house.IsSwapped).ToList();
             var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
 
             //throw new Exception("Some unknow error");
@@ -62,6 +76,13 @@ namespace home_swap_api.Controllers
             var houseFromDb = await uow.HouseRepository.FindHouse(id);
             houseFromDb.IsBlocked = !houseFromDb.IsBlocked;
             await uow.SaveAsync();
+            if (houseFromDb.IsBlocked)
+            {
+                // Delete offers associated with the blocked house
+                await uow.OfferRepository.DeleteOffersByHouseIdAsync(id);
+                await uow.SaveAsync();
+            }
+
             return StatusCode(200);
         }
 
@@ -114,6 +135,37 @@ namespace home_swap_api.Controllers
             await uow.SaveAsync();
 
             return StatusCode(200);
+        }
+
+        [HttpPost("filtered-houses")]
+        public async Task<IActionResult> GetFilteredHouses([FromBody] FilterDTO filterDTO)
+        {
+            var houses = await uow.HouseRepository.GetHousesAsync();
+            if (!string.IsNullOrEmpty(filterDTO.Type))
+            {
+                houses = houses.Where(house => house.Type == filterDTO.Type).ToList();
+            }
+            if (!string.IsNullOrEmpty(filterDTO.Garage))
+            {
+                houses = houses.Where(house => house.Garage == filterDTO.Garage).ToList();
+            }
+            if (filterDTO.Rooms.HasValue)
+            {
+                houses = houses.Where(house => house.Rooms == filterDTO.Rooms.Value).ToList();
+            }
+            if (filterDTO.MinArea.HasValue && filterDTO.MaxArea.HasValue)
+            {
+                houses = houses
+                    .Where(house => house.Area >= filterDTO.MinArea.Value && house.Area <= filterDTO.MaxArea.Value)
+                    .ToList();
+            }
+
+
+            var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
+
+            //throw new Exception("Some unknow error");
+
+            return Ok(housesDTO);
         }
 
 

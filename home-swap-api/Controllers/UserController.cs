@@ -1,6 +1,8 @@
 ﻿using System;
 using home_swap_api.Dto;
+using home_swap_api.interfaces;
 using home_swap_api.Models;
+using home_swap_api.Repository;
 using home_swap_api.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +14,12 @@ namespace home_swap_api.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserService userService;
-        public UserController(UserService userService)
+        private readonly IUnitOfWork uow;
+
+        public UserController(UserService userService , IUnitOfWork uow)
         {
             this.userService = userService;
+            this.uow = uow;
         }
 
         [HttpGet]
@@ -76,6 +81,13 @@ namespace home_swap_api.Controllers
             var result = await userService.BlockUser(id);
             if (result is null)
                 return NotFound("User not found");
+
+            if (result.IsBlocked)
+            {
+                await uow.OfferRepository.DeleteOffersByUserIdAsync(id);
+                await uow.SaveAsync();
+            }
+
 
             return Ok(result);
 

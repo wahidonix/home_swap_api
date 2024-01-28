@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using home_swap_api.Dto;
 using home_swap_api.interfaces;
 using home_swap_api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +36,15 @@ namespace home_swap_api.Controllers
             return Ok(offersDTO);
         }
 
+        [HttpGet("byHouseId/{houseId}")]
+        public async Task<IActionResult> GetOffersByHouseId(int houseId)
+        {
+            var offers = await uow.OfferRepository.GetOffersByHouseIdAsync(houseId);
+            var offersDTO = mapper.Map<IEnumerable<OfferDTO>>(offers);
+
+            return Ok(offersDTO);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddOffer([FromBody] OfferDTO offerDTO)
         {
@@ -52,8 +63,29 @@ namespace home_swap_api.Controllers
         {
             uow.OfferRepository.DeleteOffer(id);
             await uow.SaveAsync();
-
             return Ok(id);
+        }
+
+        [HttpPut("accept-offer")]
+        public async Task<IActionResult> AcceptOffer(int id)
+        {
+            var offerFromDB = await uow.OfferRepository.FindOffer(id);
+            offerFromDB.Status = "Accepted";
+            await uow.SaveAsync();
+            
+
+            return StatusCode(200);
+        }
+
+        [HttpPut("reject-offer")]
+        public async Task<IActionResult> RejectOffer(int id)
+        {
+            var offerFromDB = await uow.OfferRepository.FindOffer(id);
+            offerFromDB.Status = "Rejected";
+            await uow.SaveAsync();
+
+
+            return StatusCode(200);
         }
     }
 }
