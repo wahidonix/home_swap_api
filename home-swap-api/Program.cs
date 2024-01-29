@@ -1,27 +1,21 @@
-﻿using home_swap_api.Data;
+﻿using AutoMapper;
+using home_swap_api.Data;
+using home_swap_api.Helpers;
+using home_swap_api.interfaces;
 using home_swap_api.Service;
 using home_swap_api.Service.Impl;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Configuration;
-using home_swap_api.Repository;
-using home_swap_api.interfaces;
-using AutoMapper;
-using home_swap_api.Helpers;
 using System.Net;
-using Microsoft.AspNetCore.Diagnostics;
-using home_swap_api.Middlewares;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -52,8 +46,19 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
         ValidateAudience = false,
         ValidateIssuer = false,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                builder.Configuration.GetSection("AppSettings:Token").Value!))
+            builder.Configuration.GetSection("AppSettings:Token").Value!))
     };
+});
+
+// Add CORS support
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
 });
 
 var app = builder.Build();
@@ -66,30 +71,21 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler(
-
-            options =>
-            {
-                options.Run(
-
-                    async context =>
-                        {
-                            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                            var ex = context.Features.Get<IExceptionHandlerFeature>();
-                            if (ex != null) { await context.Response.WriteAsync(ex.Error.Message); }
-
-                        }
-
-                    );
-            }
-        );
+    app.UseExceptionHandler(options =>
+    {
+        options.Run(async context =>
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            var ex = context.Features.Get<IExceptionHandlerFeature>();
+            if (ex != null) { await context.Response.WriteAsync(ex.Error.Message); }
+        });
+    });
 }
 
+// Use CORS before other middleware
+app.UseCors("AllowAnyOrigin");
+
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
-

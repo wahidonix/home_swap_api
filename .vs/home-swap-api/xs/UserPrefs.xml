@@ -1,32 +1,36 @@
 ﻿<Properties StartupConfiguration="{AF18F496-557A-4CAC-A119-E334D0750904}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Controllers/AuthController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Controllers/HouseController.cs">
     <Files>
-      <File FileName="home-swap-api/Controllers/AuthController.cs" Line="39" Column="30" />
-      <File FileName="home-swap-api/appsettings.json" Line="3" Column="15" />
-      <File FileName="home-swap-api/Program.cs" Line="9" Column="1" />
+      <File FileName="home-swap-api/Dto/FilterDTO.cs" Line="12" Column="42" />
+      <File FileName="home-swap-api/Controllers/HouseController.cs" Line="52" Column="71" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="home-swap-api" expanded="True">
-            <Node name="home-swap-api">
-              <Node name="Controllers">
-                <Node name="AuthController.cs" selected="True" />
-              </Node>
-              <Node name="Data" expanded="True" />
+            <Node name="home-swap-api" expanded="True">
+              <Node name="Controllers" expanded="True" />
               <Node name="Dto" expanded="True" />
+              <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Repository" expanded="True" />
+              <Node name="Service" expanded="True">
+                <Node name="Impl" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
