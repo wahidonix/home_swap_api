@@ -50,6 +50,11 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     };
 });
 
+builder.Services.AddLogging(builder =>
+{
+    builder.AddConsole();
+});
+
 // Add CORS support
 builder.Services.AddCors(options =>
 {
@@ -60,6 +65,8 @@ builder.Services.AddCors(options =>
                .AllowAnyHeader();
     });
 });
+
+builder.Services.AddHostedService<UserCleanupService>();
 
 var app = builder.Build();
 
