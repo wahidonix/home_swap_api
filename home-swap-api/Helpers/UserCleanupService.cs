@@ -16,7 +16,7 @@ namespace home_swap_api.Helpers
             while (!stoppingToken.IsCancellationRequested)
             {
                 
-                await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
+                await Task.Delay(TimeSpan.FromDays(15), stoppingToken);
 
                 _logger.LogInformation("Service called");
 

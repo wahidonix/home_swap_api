@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using home_swap_api.Dto;
 using home_swap_api.Models;
@@ -69,9 +70,58 @@ namespace home_swap_api.Controllers
             authResponseDTO.Role = result.Role;
 
             string token = CreateToken(authResponseDTO);
+            var refreshToken = GenerateRefreshToken();
+            SetRefreshToken(refreshToken,authResponseDTO);
+
             authResponseDTO.Token = token;
 
             return Ok(authResponseDTO);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult> RefreshToken([FromBody] AuthResponseDTO authResponseDTO)
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+            if (!authResponseDTO.RefreshToken.Equals(refreshToken))
+            {
+                return Unauthorized("Invalid Refresh Token");
+            }
+            else if (authResponseDTO.TokenExpires < DateTime.Now)
+            {
+                return Unauthorized("Token expired");
+            }
+
+            string token = CreateToken(authResponseDTO);
+            var newRefreshToken = GenerateRefreshToken();
+            SetRefreshToken(newRefreshToken, authResponseDTO);
+
+            return Ok(new { Token = token, RefreshToken = newRefreshToken.Token });
+        }
+
+
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(7)
+            };
+
+            return refreshToken;
+        }
+
+        private void SetRefreshToken(RefreshToken newRefreshToken,AuthResponseDTO authResponseDTO)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expires,
+            };
+            Response.Cookies.Append("refreshToken", newRefreshToken.Token,cookieOptions);
+            authResponseDTO.RefreshToken = newRefreshToken.Token;
+            authResponseDTO.TokenCreated = newRefreshToken.Created;
+            authResponseDTO.TokenExpires = newRefreshToken.Expires;
+
         }
 
         private string CreateToken(AuthResponseDTO authResponseDTO)
@@ -91,7 +141,7 @@ namespace home_swap_api.Controllers
 
             var token = new JwtSecurityToken(
                     claims: claims,
-                    expires: DateTime.Now.AddDays(1),
+                    expires: DateTime.Now.AddHours(1),
                     signingCredentials: cred
                 );
 
