@@ -3,8 +3,6 @@ using home_swap_api.Data;
 using home_swap_api.Helpers;
 using home_swap_api.interfaces;
 using home_swap_api.Middlewares;
-using home_swap_api.Service;
-using home_swap_api.Service.Impl;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -30,7 +28,6 @@ builder.Services.AddSwaggerGen(options =>
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
-builder.Services.AddScoped<UserService, UserServiceImpl>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddControllers().AddNewtonsoftJson();

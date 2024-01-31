@@ -6,7 +6,6 @@ using System.Text;
 using home_swap_api.Dto;
 using home_swap_api.interfaces;
 using home_swap_api.Models;
-using home_swap_api.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
