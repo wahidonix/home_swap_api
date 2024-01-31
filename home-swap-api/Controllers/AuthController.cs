@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using home_swap_api.Dto;
+using home_swap_api.interfaces;
 using home_swap_api.Models;
 using home_swap_api.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -17,20 +18,22 @@ namespace home_swap_api.Controllers
     {
 
 
-        private readonly UserService userService;
+ 
         private readonly IConfiguration configuration;
+        private readonly IUnitOfWork uow;
 
-        public AuthController(UserService userService, IConfiguration configuration)
+        public AuthController(IConfiguration configuration, IUnitOfWork uow)
         {
-            this.userService = userService;
+         
             this.configuration = configuration;
+            this.uow = uow;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AuthResponseDTO>> Register([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<string>> Register([FromBody] UserDTO userDTO)
         {
             var user = new User();
-            var existingUser = await userService.GetUserByUsername(userDTO.Username);
+            var existingUser = await uow.UserRepository.FindUserByUsername(userDTO.Username);
             if (existingUser is not null)
                 return BadRequest("username already taken");
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(userDTO.Password);
@@ -39,23 +42,24 @@ namespace home_swap_api.Controllers
             user.PasswordHash = passwordHash;
             user.Role = "User";
             user.IsBlocked = false;
-            var result = await userService.AddUser(user);
+            uow.UserRepository.AddUser(user);
+            await uow.SaveAsync();
 
-            var authResponseDTO = new AuthResponseDTO();
-            authResponseDTO.Username = result.Username;
-            authResponseDTO.Id = result.Id;
-            authResponseDTO.Role = result.Role;
+            //var authResponseDTO = new AuthResponseDTO();
+            //authResponseDTO.Username = user.Username;
+            //authResponseDTO.Id = user.Id;
+            //authResponseDTO.Role = user.Role;
 
-            string token = CreateToken(authResponseDTO);
-            authResponseDTO.Token = token;
+            //string token = CreateToken(authResponseDTO);
+            //authResponseDTO.Token = token;
 
-            return Ok(authResponseDTO);
+            return Ok("user created!");
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] UserDTO userDTO)
         {
-            var result = await userService.GetUserByUsername(userDTO.Username);
+            var result = await uow.UserRepository.FindUserByUsername(userDTO.Username);
             if (result is null)
                 return BadRequest("user not found");
 
