@@ -2,6 +2,7 @@
 using home_swap_api.Data;
 using home_swap_api.Helpers;
 using home_swap_api.interfaces;
+using home_swap_api.Middlewares;
 using home_swap_api.Service;
 using home_swap_api.Service.Impl;
 using Microsoft.AspNetCore.Diagnostics;
@@ -15,6 +16,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<LoggerService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -91,7 +93,7 @@ else
 
 // Use CORS before other middleware
 app.UseCors("AllowAnyOrigin");
-
+app.UseMiddleware<LoggingMiddleware>(new LoggerService());
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

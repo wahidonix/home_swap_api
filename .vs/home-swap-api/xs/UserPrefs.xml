@@ -1,43 +1,34 @@
 ﻿<Properties StartupConfiguration="{AF18F496-557A-4CAC-A119-E334D0750904}|https">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Controllers/AuthController.cs">
     <Files>
-      <File FileName="home-swap-api/Dto/FilterDTO.cs" Line="12" Column="42" />
-      <File FileName="home-swap-api/Controllers/HouseController.cs" Line="52" Column="71" />
-      <File FileName="home-swap-api/Models/User.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Dto/UserDTO.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Program.cs" Line="92" Column="1" />
-      <File FileName="home-swap-api/Controllers/TestRoles.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Data/AppDbContext.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Data/UnitOfWork.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Repository/HouseRepository.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Controllers/OfferController.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Repository/IHouseRepository.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Repository/IOfferRepository.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Dto/HouseDTO.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Models/House.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Helpers/AutoMapperProfiles.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Models/Offer.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Controllers/AuthController.cs" Line="1" Column="1" />
+      <File FileName="home-swap-api/Controllers/AuthController.cs" Line="81" Column="29" />
+      <File FileName="home-swap-api/Dto/AuthResponseDTO.cs" Line="12" Column="36" />
+      <File FileName="home-swap-api/Models/RefreshToken.cs" Line="8" Column="26" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="home-swap-api" expanded="True">
+          <Node name="home-swap-api">
             <Node name="home-swap-api" expanded="True">
-              <Node name="interfaces" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Dto" expanded="True" />
+              <Node name="Helpers" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Repository" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
