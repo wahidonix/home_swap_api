@@ -8,7 +8,9 @@ namespace home_swap_api.interfaces
 		IHouseRepository HouseRepository { get; }
 
 		IOfferRepository OfferRepository { get; }
-	
+
+		IUserRepository UserRepository { get; }
+
         Task<bool> SaveAsync();
 	}
 }

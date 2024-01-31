@@ -21,11 +21,11 @@ namespace home_swap_api.Controllers
     [ApiController]
     public class HouseController : ControllerBase
     {
-  
+
         private readonly IUnitOfWork uow;
         private readonly IMapper mapper;
 
-        public HouseController(IUnitOfWork uow,IMapper mapper)
+        public HouseController(IUnitOfWork uow, IMapper mapper)
         {
             this.uow = uow;
             this.mapper = mapper;
@@ -36,7 +36,7 @@ namespace home_swap_api.Controllers
         public async Task<IActionResult> GetHouses()
         {
             var houses = await uow.HouseRepository.GetHousesAsync();
-            
+
             var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
 
             //throw new Exception("Some unknow error");
@@ -58,7 +58,7 @@ namespace home_swap_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddHouse([FromBody]HouseDTO houseDTO)
+        public async Task<IActionResult> AddHouse([FromBody] HouseDTO houseDTO)
         {
             //throw new UnauthorizedAccessException();
             var house = mapper.Map<House>(houseDTO);
@@ -103,12 +103,12 @@ namespace home_swap_api.Controllers
         {
             uow.HouseRepository.DeleteHouse(id);
             await uow.SaveAsync();
-            
+
             return Ok(id);
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateHouse(int id , HouseDTO houseDTO)
+        public async Task<IActionResult> UpdateHouse(int id, HouseDTO houseDTO)
         {
             var houseFromDb = await uow.HouseRepository.FindHouse(id);
             mapper.Map(houseDTO, houseFromDb);
@@ -128,7 +128,7 @@ namespace home_swap_api.Controllers
         }
 
         [HttpPatch("update/{id}")]
-        public async Task<IActionResult> UpdateHousePatch(int id, JsonPatchDocument <House> houseToPatch)
+        public async Task<IActionResult> UpdateHousePatch(int id, JsonPatchDocument<House> houseToPatch)
         {
             var houseFromDb = await uow.HouseRepository.FindHouse(id);
             houseToPatch.ApplyTo(houseFromDb, ModelState);

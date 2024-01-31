@@ -16,6 +16,8 @@ namespace home_swap_api.Data
 
         public IOfferRepository OfferRepository => new OfferRepository(appDbContext);
 
+        public IUserRepository UserRepository => new UserRepository(appDbContext);
+
         public async Task<bool> SaveAsync()
         {
             return await appDbContext.SaveChangesAsync() > 0;
