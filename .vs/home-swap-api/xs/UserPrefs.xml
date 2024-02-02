@@ -1,21 +1,36 @@
 ﻿<Properties StartupConfiguration="{AF18F496-557A-4CAC-A119-E334D0750904}|https">
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Controllers/AuthController.cs">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Helpers/UserCleanupService.cs">
     <Files>
-      <File FileName="home-swap-api/Controllers/AuthController.cs" Line="81" Column="29" />
-      <File FileName="home-swap-api/Dto/AuthResponseDTO.cs" Line="12" Column="36" />
-      <File FileName="home-swap-api/Models/RefreshToken.cs" Line="8" Column="26" />
+      <File FileName="home-swap-api/Controllers/AuthController.cs" Line="65" Column="59" />
+      <File FileName="home-swap-api/Controllers/UserController.cs" Line="103" Column="19" />
+      <File FileName="home-swap-api/Dto/LoginRegisterDTO.cs" Line="7" Column="54" />
+      <File FileName="home-swap-api/Dto/UserDTO.cs" Line="7" Column="8" />
+      <File FileName="home-swap-api/Helpers/LoggerService.cs" Line="1" Column="1" />
+      <File FileName="home-swap-api/Middlewares/LoggingMiddleware.cs" Line="1" Column="1" />
+      <File FileName="home-swap-api/Helpers/UserCleanupService.cs" Line="19" Column="56" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="home-swap-api">
-            <Node name="home-swap-api" expanded="True">
-              <Node name="Controllers" expanded="True" />
+            <Node name="home-swap-api">
+              <Node name="Data" expanded="True" />
               <Node name="Dto" expanded="True" />
-              <Node name="Helpers" expanded="True" />
+              <Node name="Helpers">
+                <Node name="UserCleanupService.cs" selected="True" />
+              </Node>
+              <Node name="interfaces" expanded="True" />
+              <Node name="Middlewares" expanded="True" />
+              <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
-              <Node name="Repository" expanded="True" />
+              <Node name="Properties" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -25,10 +40,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
