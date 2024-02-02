@@ -9,7 +9,6 @@ using home_swap_api.Dto;
 using home_swap_api.interfaces;
 using home_swap_api.Models;
 using home_swap_api.Queries;
-using home_swap_api.Repository;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
