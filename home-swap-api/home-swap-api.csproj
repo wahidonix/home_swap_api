@@ -28,6 +28,8 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +40,8 @@
     <None Remove="interfaces\" />
     <None Remove="Helpers\" />
     <None Remove="Middlewares\" />
+    <None Remove="Queries\" />
+    <None Remove="Handlers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -47,5 +51,7 @@
     <Folder Include="interfaces\" />
     <Folder Include="Helpers\" />
     <Folder Include="Middlewares\" />
+    <Folder Include="Queries\" />
+    <Folder Include="Handlers\" />
   </ItemGroup>
 </Project>

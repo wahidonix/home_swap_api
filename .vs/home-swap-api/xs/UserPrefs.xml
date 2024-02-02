@@ -1,36 +1,25 @@
 ﻿<Properties StartupConfiguration="{AF18F496-557A-4CAC-A119-E334D0750904}|https">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Helpers/UserCleanupService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Program.cs">
     <Files>
-      <File FileName="home-swap-api/Controllers/AuthController.cs" Line="65" Column="59" />
-      <File FileName="home-swap-api/Controllers/UserController.cs" Line="103" Column="19" />
-      <File FileName="home-swap-api/Dto/LoginRegisterDTO.cs" Line="7" Column="54" />
-      <File FileName="home-swap-api/Dto/UserDTO.cs" Line="7" Column="8" />
-      <File FileName="home-swap-api/Helpers/LoggerService.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Middlewares/LoggingMiddleware.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Helpers/UserCleanupService.cs" Line="19" Column="56" />
+      <File FileName="home-swap-api/Controllers/HouseController.cs" />
+      <File FileName="home-swap-api/Queries/UpdateHouseQuery.cs" />
+      <File FileName="home-swap-api/Handlers/UpdateHouseHandler.cs" />
+      <File FileName="home-swap-api/Program.cs" Line="101" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="home-swap-api">
-            <Node name="home-swap-api">
-              <Node name="Data" expanded="True" />
-              <Node name="Dto" expanded="True" />
-              <Node name="Helpers">
-                <Node name="UserCleanupService.cs" selected="True" />
-              </Node>
-              <Node name="interfaces" expanded="True" />
-              <Node name="Middlewares" expanded="True" />
-              <Node name="Migrations" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Properties" expanded="True" />
+          <Node name="home-swap-api" expanded="True">
+            <Node name="home-swap-api" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
