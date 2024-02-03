@@ -9,6 +9,7 @@ namespace home_swap_api.Repository
 		void AddHouse(House house);
 		void DeleteHouse(int HouseId);
 		Task<House> FindHouse(int id);
+		Task<House> FindHouseByUserId(int userId);
 	}
 }
 
