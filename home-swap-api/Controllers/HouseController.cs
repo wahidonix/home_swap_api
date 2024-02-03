@@ -8,7 +8,8 @@ using home_swap_api.Data;
 using home_swap_api.Dto;
 using home_swap_api.interfaces;
 using home_swap_api.Models;
-using home_swap_api.Repository;
+using home_swap_api.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -22,78 +23,58 @@ namespace home_swap_api.Controllers
     public class HouseController : ControllerBase
     {
 
-        private readonly IUnitOfWork uow;
-        private readonly IMapper mapper;
+        private readonly IMediator mediator;
 
-        public HouseController(IUnitOfWork uow, IMapper mapper)
+        public HouseController(IMediator mediator)
         {
-            this.uow = uow;
-            this.mapper = mapper;
+            this.mediator = mediator;
         }
 
 
         [HttpGet]
         public async Task<IActionResult> GetHouses()
         {
-            var houses = await uow.HouseRepository.GetHousesAsync();
+            var query = new GetHousesQuery();
+            var result = await mediator.Send(query);
 
-            var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
-
-            //throw new Exception("Some unknow error");
-
-            return Ok(housesDTO);
+            return Ok(result);
         }
 
         [HttpGet("available-houses")]
         public async Task<IActionResult> GetAvailableHouses()
         {
-            var houses = await uow.HouseRepository.GetHousesAsync();
-            houses = houses.Where(house => !house.IsBlocked).ToList();
-            houses = houses.Where(house => !house.IsSwapped).ToList();
-            var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
+            var query = new GetAvailableHousesQuery();
+            var result = await mediator.Send(query);
 
-            //throw new Exception("Some unknow error");
-
-            return Ok(housesDTO);
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddHouse([FromBody] HouseDTO houseDTO)
         {
-            //throw new UnauthorizedAccessException();
-            var house = mapper.Map<House>(houseDTO);
+            var query = new AddHouseQuery { HouseDTO = houseDTO };
+            var result = await mediator.Send(query);
 
-
-            uow.HouseRepository.AddHouse(house);
-            await uow.SaveAsync();
-
-            return StatusCode(201);
+            return Ok(result);
+           
         }
 
         [HttpPut("blocked-status/(id)"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> BlockHouse(int id)
         {
-            var houseFromDb = await uow.HouseRepository.FindHouse(id);
-            houseFromDb.IsBlocked = !houseFromDb.IsBlocked;
-            await uow.SaveAsync();
-            if (houseFromDb.IsBlocked)
-            {
-                // Delete offers associated with the blocked house
-                await uow.OfferRepository.DeleteOffersByHouseIdAsync(id);
-                await uow.SaveAsync();
-            }
+            var query = new BlockHouseQuery(id);
+            var result = await mediator.Send(query);
 
-            return StatusCode(200);
+            return Ok(result);
         }
 
         [HttpPut("swapped-status/(id)"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> SwapHouse(int id)
         {
-            var houseFromDb = await uow.HouseRepository.FindHouse(id);
-            houseFromDb.IsSwapped = !houseFromDb.IsSwapped;
-            await uow.SaveAsync();
+            var query = new SwappHouseQuery(id);
+            var result = await mediator.Send(query);
 
-            return StatusCode(200);
+            return Ok(result);
         }
 
 
@@ -101,71 +82,31 @@ namespace home_swap_api.Controllers
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteHouse(int id)
         {
-            uow.HouseRepository.DeleteHouse(id);
-            await uow.SaveAsync();
+            var query = new DeleteHouseQuery(id);
+            var result = await mediator.Send(query);
 
-            return Ok(id);
+            return result != null ? Ok(id) : NotFound();
+           
         }
 
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateHouse(int id, HouseDTO houseDTO)
         {
-            var houseFromDb = await uow.HouseRepository.FindHouse(id);
-            mapper.Map(houseDTO, houseFromDb);
-            await uow.SaveAsync();
+            var query = new UpdateHouseQuery(id, houseDTO);
+            var result = await mediator.Send(query);
 
-            return StatusCode(200);
+            return Ok(result);
         }
 
-        [HttpPut("updateHouseGarage/{id}")]
-        public async Task<IActionResult> UpdateHouse(int id, HouseUpdateDTO houseDTO)
-        {
-            var houseFromDb = await uow.HouseRepository.FindHouse(id);
-            mapper.Map(houseDTO, houseFromDb);
-            await uow.SaveAsync();
-
-            return StatusCode(200);
-        }
-
-        [HttpPatch("update/{id}")]
-        public async Task<IActionResult> UpdateHousePatch(int id, JsonPatchDocument<House> houseToPatch)
-        {
-            var houseFromDb = await uow.HouseRepository.FindHouse(id);
-            houseToPatch.ApplyTo(houseFromDb, ModelState);
-            await uow.SaveAsync();
-
-            return StatusCode(200);
-        }
+        
 
         [HttpPost("filtered-houses")]
         public async Task<IActionResult> GetFilteredHouses([FromBody] FilterDTO filterDTO)
         {
-            var houses = await uow.HouseRepository.GetHousesAsync();
-            if (!string.IsNullOrEmpty(filterDTO.Type))
-            {
-                houses = houses.Where(house => house.Type == filterDTO.Type).ToList();
-            }
-            if (!string.IsNullOrEmpty(filterDTO.Garage))
-            {
-                houses = houses.Where(house => house.Garage == filterDTO.Garage).ToList();
-            }
-            if (filterDTO.Rooms.HasValue)
-            {
-                houses = houses.Where(house => house.Rooms == filterDTO.Rooms.Value).ToList();
-            }
-            if (filterDTO.MinArea.HasValue && filterDTO.MaxArea.HasValue)
-            {
-                houses = houses
-                    .Where(house => house.Area >= filterDTO.MinArea.Value && house.Area <= filterDTO.MaxArea.Value)
-                    .ToList();
-            }
+            var query = new GetFilteredHousesQuery(filterDTO);
+            var result = await mediator.Send(query);
 
-
-            var housesDTO = mapper.Map<IEnumerable<HouseDTO>>(houses);
-
-            //throw new Exception("Some unknow error");
-
-            return Ok(housesDTO);
+            return Ok(result);
         }
 
 

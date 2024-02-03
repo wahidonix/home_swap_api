@@ -29,15 +29,15 @@ namespace home_swap_api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<string>> Register([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<string>> Register([FromBody] LoginRegisterDTO loginRegisterDTO)
         {
             var user = new User();
-            var existingUser = await uow.UserRepository.FindUserByUsername(userDTO.Username);
+            var existingUser = await uow.UserRepository.FindUserByUsername(loginRegisterDTO.Username);
             if (existingUser is not null)
                 return BadRequest("username already taken");
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(userDTO.Password);
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(loginRegisterDTO.Password);
 
-            user.Username = userDTO.Username;
+            user.Username = loginRegisterDTO.Username;
             user.PasswordHash = passwordHash;
             user.Role = "User";
             user.IsBlocked = false;
@@ -56,13 +56,13 @@ namespace home_swap_api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] LoginRegisterDTO loginRegisterDTO)
         {
-            var result = await uow.UserRepository.FindUserByUsername(userDTO.Username);
+            var result = await uow.UserRepository.FindUserByUsername(loginRegisterDTO.Username);
             if (result is null)
                 return BadRequest("user not found");
 
-            if (!BCrypt.Net.BCrypt.Verify(userDTO.Password, result.PasswordHash))
+            if (!BCrypt.Net.BCrypt.Verify(loginRegisterDTO.Password, result.PasswordHash))
             {
                 return BadRequest("wrong password");
             }
