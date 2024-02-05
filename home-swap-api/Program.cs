@@ -36,10 +36,10 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
-var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    options.UseSqlServer(connectionString);
 });
 builder.Services.AddAuthentication().AddJwtBearer(options =>
 {

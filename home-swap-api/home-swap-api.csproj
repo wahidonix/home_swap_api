@@ -30,6 +30,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="MediatR" Version="7.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,7 @@
     <None Remove="Middlewares\" />
     <None Remove="Queries\" />
     <None Remove="Handlers\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -53,5 +55,6 @@
     <Folder Include="Middlewares\" />
     <Folder Include="Queries\" />
     <Folder Include="Handlers\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
