@@ -1,4 +1,4 @@
-WORKDIR "/home-swap-api"
+WORKDIR /home-swap-api
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /App
 
