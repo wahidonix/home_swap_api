@@ -66,7 +66,7 @@ namespace home_swap_api.Controllers
             return Ok(id);
         }
 
-        [HttpPut("accept-offer")]
+        [HttpPut("accept-offer/{id}")]
         public async Task<IActionResult> AcceptOffer(int id)
         {
             var offerFromDB = await uow.OfferRepository.FindOffer(id);

@@ -1,30 +1,33 @@
 ﻿<Properties StartupConfiguration="{AF18F496-557A-4CAC-A119-E334D0750904}|https">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Handlers/UpdateHouseHandler.cs">
+  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="home-swap-api/Controllers/HouseController.cs">
     <Files>
-      <File FileName="home-swap-api/Controllers/HouseController.cs" Line="11" Column="29" />
-      <File FileName="home-swap-api/Queries/UpdateHouseQuery.cs" />
-      <File FileName="home-swap-api/Handlers/UpdateHouseHandler.cs" Line="1" Column="1" />
-      <File FileName="home-swap-api/Program.cs" />
+      <File FileName="home-swap-api/Controllers/HouseController.cs" Line="64" Column="57" />
+      <File FileName="home-swap-api/Handlers/GetSingleHouseByIdHandler.cs" Line="25" Column="29" />
+      <File FileName="home-swap-api/Handlers/GetSingleHouseHandler.cs" Line="22" Column="13" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="home-swap-api">
             <Node name="home-swap-api">
-              <Node name="Handlers" expanded="True">
-                <Node name="UpdateHouseHandler.cs" selected="True" />
+              <Node name="Controllers">
+                <Node name="HouseController.cs" selected="True" />
               </Node>
+              <Node name="Handlers" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.home-swap-api PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>
