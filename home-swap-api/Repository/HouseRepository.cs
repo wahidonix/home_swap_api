@@ -31,6 +31,11 @@ namespace home_swap_api.Repository
             return await appDbContext.Houses.FindAsync(id);
         }
 
+        public async Task<House> FindHouseByUserId(int userId)
+        {
+            return await appDbContext.Houses.FirstOrDefaultAsync(house => house.UserId == userId);
+        }
+
         public async Task<IEnumerable<House>> GetHousesAsync()
         {
             return await appDbContext.Houses.ToListAsync();

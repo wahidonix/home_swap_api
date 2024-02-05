@@ -44,15 +44,14 @@ namespace home_swap_api.Controllers
             uow.UserRepository.AddUser(user);
             await uow.SaveAsync();
 
-            //var authResponseDTO = new AuthResponseDTO();
-            //authResponseDTO.Username = user.Username;
-            //authResponseDTO.Id = user.Id;
-            //authResponseDTO.Role = user.Role;
+            var authResponseDTO = new AuthResponseDTO();
+            authResponseDTO.Username = user.Username;
+            authResponseDTO.Id = user.Id;
+            authResponseDTO.Role = user.Role;
 
-            //string token = CreateToken(authResponseDTO);
-            //authResponseDTO.Token = token;
+            
 
-            return Ok("user created!");
+            return Ok(authResponseDTO);
         }
 
         [HttpPost("login")]

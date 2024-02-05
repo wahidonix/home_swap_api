@@ -100,7 +100,7 @@ namespace home_swap_api.Controllers
 
      
 
-        [HttpPut("blocked-status/(id)")]
+        [HttpPut("blocked-status/{id}")]
         public async Task<ActionResult<User>> NewBlockUser(int id)
         {
             var result = await uow.UserRepository.BlockUser(id);

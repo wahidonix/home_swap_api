@@ -49,6 +49,24 @@ namespace home_swap_api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("signle-house/{userId}")]
+        public async Task<IActionResult> GetSingleHouse(int userId)
+        {
+            var query = new GetSingleHouseQuery(userId);
+            var result = await mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpGet("signle-house-by-id/{id}")]
+        public async Task<IActionResult> GetSingleHouseById(int id)
+        {
+            var query = new GetSingleHouseByIdQuery(id);
+            var result = await mediator.Send(query);
+
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddHouse([FromBody] HouseDTO houseDTO)
         {
@@ -59,7 +77,7 @@ namespace home_swap_api.Controllers
            
         }
 
-        [HttpPut("blocked-status/(id)"), Authorize(Roles = "Admin")]
+        [HttpPut("blocked-status/{id}")]
         public async Task<IActionResult> BlockHouse(int id)
         {
             var query = new BlockHouseQuery(id);
@@ -68,10 +86,19 @@ namespace home_swap_api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("swapped-status/(id)"), Authorize(Roles = "Admin")]
+        [HttpPut("swapped-status/{id}")]
         public async Task<IActionResult> SwapHouse(int id)
         {
             var query = new SwappHouseQuery(id);
+            var result = await mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpPut("swapped-status-by-userId/{userId}")]
+        public async Task<IActionResult> SwapHouseByUserId(int userId)
+        {
+            var query = new SwappHouseByUserIdQuery(userId);
             var result = await mediator.Send(query);
 
             return Ok(result);
