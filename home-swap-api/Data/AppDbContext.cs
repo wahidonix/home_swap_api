@@ -13,6 +13,7 @@ namespace home_swap_api.Data
 		public DbSet<User> Users { get; set; }
 		public DbSet<House> Houses { get; set; }
 		public DbSet<Offer> Offers { get; set; }
+		public DbSet<Image> Images { get; set; }
     }
 }
 
