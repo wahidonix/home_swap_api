@@ -66,7 +66,8 @@ namespace home_swap_api.Controllers
         {
             //throw new UnauthorizedAccessException();
             var user = mapper.Map<User>(userDTO);
-
+            user.DateBlocked = null;
+            user.Blocked = "no";
 
             uow.UserRepository.AddUser(user);
             await uow.SaveAsync();
@@ -109,7 +110,15 @@ namespace home_swap_api.Controllers
 
             if (result.IsBlocked)
             {
+                result.DateBlocked = DateTime.Now;
+                result.Blocked = "yes";
                 await uow.OfferRepository.DeleteOffersByUserIdAsync(id);
+                await uow.SaveAsync();
+            }
+            else
+            {
+                result.Blocked = "no";
+                result.DateBlocked = null;
                 await uow.SaveAsync();
             }
 
