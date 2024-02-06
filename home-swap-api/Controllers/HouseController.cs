@@ -112,7 +112,7 @@ namespace home_swap_api.Controllers
             var query = new DeleteHouseQuery(id);
             var result = await mediator.Send(query);
 
-            return result != null ? Ok(id) : NotFound();
+            return Ok(id);
            
         }
 

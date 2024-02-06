@@ -41,6 +41,7 @@ namespace home_swap_api.Controllers
             user.PasswordHash = passwordHash;
             user.Role = "User";
             user.IsBlocked = false;
+            user.Blocked = "no";
             uow.UserRepository.AddUser(user);
             await uow.SaveAsync();
 

@@ -17,8 +17,8 @@ namespace home_swap_api.Controllers
             this.appDbContext = appDbContext;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UploadImage(IFormFile file)
+        [HttpPost("{houseId}")]
+        public async Task<IActionResult> UploadImage(IFormFile file,int houseId)
         {
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded.");
@@ -30,7 +30,8 @@ namespace home_swap_api.Controllers
                 {
                     FileName = file.FileName,
                     ContentType = file.ContentType,
-                    ImageData = memoryStream.ToArray()
+                    ImageData = memoryStream.ToArray(),
+                    HouseId = houseId
                 };
 
                 appDbContext.Images.Add(image);

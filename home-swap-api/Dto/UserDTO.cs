@@ -9,6 +9,8 @@ namespace home_swap_api.Dto
         public string PasswordHash { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
         public bool IsBlocked { get; set; } = false;
+        public DateTime? DateBlocked { get; set; }
+        public string Blocked { get; set; }
     }
 }
 

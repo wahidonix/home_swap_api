@@ -14,6 +14,7 @@ namespace home_swap_api.Data
 		public DbSet<House> Houses { get; set; }
 		public DbSet<Offer> Offers { get; set; }
 		public DbSet<Image> Images { get; set; }
+		public DbSet<CloudinaryImage> CloudinaryImages { get; set; }
     }
 }
 
